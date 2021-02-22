@@ -2,6 +2,8 @@
 
 use App\Student;
 
+use Faker\Generator as Faker;
+
 use Illuminate\Database\Seeder;
 
 class StudentSeeder extends Seeder
@@ -11,7 +13,7 @@ class StudentSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
         // $student_list = [
         //     [
@@ -28,13 +30,20 @@ class StudentSeeder extends Seeder
         //     ]
         // ];
 
-        $student_list = config('student');
+        // $student_list = config('student');
 
-        foreach ($student_list as $student) {
-           $newStudent = new Student();
-           $newStudent->name = $student['name'];
-           $newStudent->surname = $student['surname'];
-           $newStudent->save();
+        // foreach ($student_list as $student) {
+        //    $newStudent = new Student();
+        //    $newStudent->name = $student['name'];
+        //    $newStudent->surname = $student['surname'];
+        //    $newStudent->save();
+        // }
+
+        for ($i = 0; $i < 3; $i++) {
+            $newStudent = new Student();
+            $newStudent->name = $faker->name();
+            $newStudent->surname = $faker->lastName();
+            $newStudent->save();
         }
     }
 }
